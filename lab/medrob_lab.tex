@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Arsclassica Article
+% LaTeX Template
+% Version 1.1 (1/8/17)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Lorenzo Pantieri (http://www.lorenzopantieri.net) with extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+11pt, % Main document font size
+a4paper, % Paper type, use 'letterpaper' for US Letter paper
+oneside, % One page layout (no page indentation)
+%twoside, % Two page layout (page indentation for binding and different headers)
+headinclude,footinclude, % Extra spacing for the header and footer
+BCOR5mm, % Binding correction
+]{scrartcl}
+
+\input{structure.tex} % Include the structure.tex file which specified the document structure and layout
+
+\hyphenation{Fortran hy-phen-ation} % Specify custom hyphenation points in words with dashes where you would like hyphenation to occur, or alternatively, don't put any dashes in a word to stop hyphenation altogether
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+
+\def\mf{\ensuremath\mathbf}
+\def\mb{\ensuremath\mathbb}
+\def\lp{\ensuremath\left(}
+\def\rp{\ensuremath\right)}
+\def\lv{\ensuremath\left\lvert}
+\def\rv{\ensuremath\right\rvert}
+\def\lV{\ensuremath\left\lVert}
+\def\rV{\ensuremath\right\rVert}
+\def\lc{\ensuremath\left\{}
+\def\rc{\ensuremath\right\}}
+\def\ls{\ensuremath\left[}
+\def\rs{\ensuremath\right]}
+\def\bmx{\ensuremath\begin{bmatrix*}[r]}
+\def\emx{\ensuremath\end{bmatrix*}}
+\def\bmxc{\ensuremath\begin{bmatrix*}[c]}
+ 
+%% Mycolors
+\definecolor{myred}{RGB}{192,0,0}
+\definecolor{mygray}{RGB}{100,100,100}
+\definecolor{bandcolor}{RGB}{0, 102, 204}
+
+\newcommand{\thrm}[2]{{\color{blue}#1}\vspace{0.25cm} \\ {\setlength{\parindent}{0cm} \textbf{Proof: } #2 $\blacksquare$}}
+
+% Define custom details
+\newcommand{\myinstitute}{Dept. of Bioengineering, CMC Vellore}
+\newcommand{\myemail}{email@example.com}
+
+\makeatletter
+\renewcommand{\maketitle}{
+  \begin{center}
+    {\Huge\@title\par}
+    \vskip 0.5em
+    {\Large\@subtitle\par}
+    \vskip 1em
+    {\large\begin{tabular}[t]{c}
+      \@author \\
+      \textcolor{mygray}{\myinstitute}
+    \end{tabular}\par}
+    \vskip 1em
+    \@date
+  \end{center}
+}
+\makeatother
+
+% Set section color
+\titleformat{\section}
+  {\color{myred}\normalfont\Large\bfseries}
+  {\thesection}{1em}{}
+
+  \titleformat{\subsection}
+  {\color{myred}\normalfont\large\bfseries}
+  {\thesection}{1em}{}
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND AUTHOR(S)
+%----------------------------------------------------------------------------------------
+
+\title{\textcolor{myred}{Medical Robotics}} % The article title
+
+\subtitle{{Course Lab Manual}} % Uncomment to display a subtitle
+
+\author{\textcolor{mygray}{\large Sivakumar Balasubramanian}} % The article author(s) - author affiliations need to be specified in the AUTHOR AFFILIATIONS block
+
+\date{} % An optional date to appear under the author(s)
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	HEADERS
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\sectionmark}[1]{\markright{\spacedlowsmallcaps{#1}}} % The header for all pages (oneside) or for even pages (twoside)
+%\renewcommand{\subsectionmark}[1]{\markright{\thesubsection~#1}} % Uncomment when using the twoside option - this modifies the header on odd pages
+\lehead{\mbox{\llap{\small\thepage\kern1em\color{halfgray} \vline}\color{halfgray}\hspace{0.5em}\rightmark\hfil}} % The header style
+
+\pagestyle{scrheadings} % Enable the headers specified in this block
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS & LISTS OF FIGURES AND TABLES
+%----------------------------------------------------------------------------------------
+
+\maketitle % Print the title/author/date block
+
+\setcounter{tocdepth}{2} % Set the depth of the table of contents to show sections and subsections only
+
+\tableofcontents % Print the table of contents
+
+\newpage % Start the article content on the second page, remove this if you have a longer abstract that goes onto the second page
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+% -----
+% Introduction
+% -----
+\input{sections/intro.tex}
+
+% -----
+% RIGID BODY TRANSFORMATIONS
+% -----
+\input{sections/lab1.tex}
+
+% -----
+% MOTOR CHARACTERIZATION
+% -----
+\section{Motor Characterization}
+\vspace{0.5cm}
+\newpage
+
+% -----
+% GEAR DESIGN AND CHARACTERIZATION
+% -----
+\section{Gear Design and Characterization}
+\vspace{0.5cm}
+\newpage
+
+% -----
+% SINGLE JOINT CONTROL
+% -----
+\section{Single Joint Control}
+\hrule
+\vspace{0.5cm}
+\newpage
+
+% -----
+% MULTIJOINT MOTION PLANNING AND CONTROL
+% -----
+\section{Multijoint Motion Planning and Control}
+\hrule
+\vspace{0.5cm}
+\newpage
+
+% -----
+% FORCE, COMPLIANCE, AND IMPEDANCE CONTROL
+% -----
+\section{Force, Compliance, and Impedance Control}
+\hrule
+\vspace{0.5cm}
+
+\end{document}
