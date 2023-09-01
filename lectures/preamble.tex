@@ -17,10 +17,18 @@
 \usetikzlibrary{calc}
 \usepackage[]{algorithm2e}
 \usepackage{changepage}
+% Math stuff
+\usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{xcolor}
+\usepackage{bm}
 \usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{scalerel} 
+\usepackage{nicefrac}
+% Custom colors
+\usepackage{xcolor}
 \usepackage{tcolorbox}
+% tikz drawings
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
 \usetikzlibrary{arrows.meta, decorations.pathreplacing, positioning, shapes.geometric}
@@ -59,6 +67,13 @@
 \newcommand{\dt}[1]{\ls #1\rs}
 \newcommand{\cols}[2]{\begin{columns}[#1] #2 \end{columns}}
 \newcommand{\col}[2]{\begin{column}{#1} #2 \end{column}}
+
+%% Dealing with multiple reference frames
+%% Definitions for rotation matrices and vectors; fixes problems with large font size for subscripts and superscripts when using \mathcal fonts
+\newcommand{\rotm}[3]{{}_{\scaleto{#2}{5pt}}^{\scaleto{#1}{5pt}}{\mf{#3}}}
+\newcommand{\axb}[3]{{}_{}^{\scaleto{#1}{5pt}}{\mf{#2}}_{\scaleto{#3}{5pt}}}
+\newcommand{\ax}[2]{{}_{}^{\scaleto{#1}{5pt}}{\mf{#2}}}
+\newcommand{\dotp}[0]{\;} %AMC - in case we want to replace \cdot with a space; its useful to write \dotp in the document to distinguish the different terms when editing the equations
 
 %% Mycolors
 \definecolor{myred}{RGB}{192,0,0}
