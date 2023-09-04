@@ -20,6 +20,8 @@
 % Math stuff
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{cancel}   % For \cancel command
+\usepackage{ulem}  % For \sout command
 \usepackage{bm}
 \usepackage{mathtools}
 \usepackage{amsthm}
@@ -67,12 +69,16 @@
 \newcommand{\dt}[1]{\ls #1\rs}
 \newcommand{\cols}[2]{\begin{columns}[#1] #2 \end{columns}}
 \newcommand{\col}[2]{\begin{column}{#1} #2 \end{column}}
+\newcommand{\rbframe}[1]{$\lc {#1} \rc$}
 
 %% Dealing with multiple reference frames
 %% Definitions for rotation matrices and vectors; fixes problems with large font size for subscripts and superscripts when using \mathcal fonts
-\newcommand{\rotm}[3]{{}_{\scaleto{#2}{5pt}}^{\scaleto{#1}{5pt}}{\mf{#3}}}
-\newcommand{\axb}[3]{{}_{}^{\scaleto{#1}{5pt}}{\mf{#2}}_{\scaleto{#3}{5pt}}}
-\newcommand{\ax}[2]{{}_{}^{\scaleto{#1}{5pt}}{\mf{#2}}}
+% \newcommand{\rotm}[3]{{}_{\scaleto{#2}{5pt}}^{\scaleto{#1}{5pt}}{\mf{#3}}}
+% \newcommand{\axb}[3]{{}_{}^{\scaleto{#1}{5pt}}{\mf{#2}}_{\scaleto{#3}{5pt}}}
+% \newcommand{\ax}[2]{{}_{}^{\scaleto{#1}{5pt}}{\mf{#2}}}
+\newcommand{\rotm}[2]{{\mf{#1}}_{\scaleto{#2}{5pt}}}
+% \newcommand{\axb}[3]{{}_{}^{\scaleto{#1}{5pt}}{\mf{#2}}_{\scaleto{#3}{5pt}}}
+\newcommand{\ax}[2]{{\mf{#1}}_{\scaleto{#2}{5pt}}}
 \newcommand{\dotp}[0]{\;} %AMC - in case we want to replace \cdot with a space; its useful to write \dotp in the document to distinguish the different terms when editing the equations
 
 %% Mycolors

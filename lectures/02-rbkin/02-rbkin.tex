@@ -479,7 +479,7 @@ Christian Medical College Vellore
 
 \begin{frame}[t]{Matrix Inverse}
 \begin{itemize}
-    \item Consider the equation $\mf{Ax} = \mf{y}$, where $\mf{A} \in \mb{R}^{n \times n}$ and $\mf{x}, \mf{y} \in \ mb{R}^n$. 
+    \item Consider the equation $\mf{Ax} = \mf{y}$, where $\mf{A} \in \mb{R}^{n \times n}$ and $\mf{x}, \mf{y} \in \mb{R}^n$. 
 
     \item Assume $\mf{A}$ is non-singular $\implies$ columns of $\mf{A}$, $\lc \mf{a}_1, \mf{a}_2, \cdots \mf{a}_n\rc$, represent a basis for $\mb{R}^n$.
 
@@ -491,6 +491,181 @@ Christian Medical College Vellore
 
 
 \begin{frame}{Some more definitions and conventions}
+  When studying kinematics we will always assume the following:
+  \begin{itemize}
+    \item \textbf{Fixed frame} $F$: This is a stationary frame of reference attached to the corner of a room, the base of a robot, etc.
+    \item \textbf{Body frame} $B$: A frame attached to a rigid body of interest. E.g. frame of a robot's moving link, frame on a mobile robot's chasis, etc.
+    \item All frames are assumed to be right-handed frames. If $\mf{x}$ and $\mf{y}$ are the x and x axes of a referene frame, then $\mf{z} = \mf{x} \times \mf{y}$, where `$\times$' is the cross product between two vectors.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation}
+  \begin{columns}[T]
+    \begin{column}{0.475\textwidth}
+      Let rbframe{s} and \rbframe{b} be the fixed and body frames respectively. The body frame is rotated by an angle $\theta$ with respect to the fixed frame.
+
+      The vectors $\lc \mf{x}_{s}, \mf{y}_s \rc$ and $\lc \mf{x}_b, \mf{y}_b \rc$ form an orthonormal basis for \rbframe{s} and \rbframe{b}, respectively.
+
+      The representation of the basis vectors of \rbframe{b} in \rbframe{s} are given by the following,
+      \[ \mf{x}_b = \bmx \mf{x}_s^\top \mf{x}_b \\ \mf{y}_s^\top \mf{x}_b \emx \quad \mf{y}_b = \bmx \mf{x}_s^\top \mf{y}_b \\ \mf{y}_s^\top \mf{y}_b \emx \]
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=8]
+          \foreach \x in {-0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,0.4);
+          \foreach \x in {-0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(0.4,\x);
+          \draw[very thick, blue, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm]{$\mf{x}_s$};
+          \draw[very thick, blue, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm]{$\mf{y}_s$};
+          \draw[very thick, brown, -latex] (0, 0) -- (0.1414,0.1414) node[xshift=0.1cm, yshift=0.1cm]{$\mf{x}_b$};
+          \draw[very thick, brown, -latex] (0, 0) -- (-0.1414, 0.1414) node[xshift=-0.15cm, yshift=0.15cm]{$\mf{y}_b$};
+          % Draw a radius
+          \draw (0,0) ++ (0.1,0) arc (0:45:0.1) node[midway, right]{$\theta$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation}
+  \begin{columns}[T]
+    \begin{column}{0.475\textwidth}
+      This representation can be compactly expressed as the following,
+      \[ \bmx \mf{x}_b & \mf{y}_b \emx = \bmx \mf{x}_s^\top \mf{x}_b & \mf{x}_s^\top \mf{y}_b \\ \mf{y}_s^\top \mf{x}_b & \mf{y}_s^\top \mf{y}_b \emx \]
+
+      From the definition of the standard inner product, we know that,
+      \[ \bmx \mf{x}_b & \mf{y}_b \emx = \bmx \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \emx \triangleq \mf{R}_{sb} \]
+
+      $\mf{R}_{sb}$ is rotation matrix representing \rbframe{b} in \rbframe{s}. It is parametrized by a single parameter $\theta$.
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=8]
+          \foreach \x in {-0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,0.4);
+          \foreach \x in {-0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(0.4,\x);
+          \draw[very thick, blue, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm]{$\mf{x}_s$};
+          \draw[very thick, blue, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm]{$\mf{y}_s$};
+          \draw[very thick, brown, -latex] (0, 0) -- (0.1414,0.1414) node[xshift=0.1cm, yshift=0.1cm]{$\mf{x}_b$};
+          \draw[very thick, brown, -latex] (0, 0) -- (-0.1414, 0.1414) node[xshift=-0.15cm, yshift=0.15cm]{$\mf{y}_b$};
+          % Draw a radius
+          \draw (0,0) ++ (0.1,0) arc (0:45:0.1) node[midway, right]{$\theta$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation}
+  \begin{columns}[T]
+    \begin{column}{0.575\textwidth}
+      All 2D Rotaiton matrices $\mf{R} \in \mb{R}^{2 \times 2}$ are orthogonal matrices, i.e. $\mf{R}^{-1} = \mf{R}^\top$.
+
+      Rotation matrices have different purposes:
+      \begin{enumerate}
+        \item $\mf{R}_{sb}$: Represents the orientation of \rbframe{b} in \rbframe{s}.
+        \item Transforming vectors between reference frames.
+        \[ \mf{v}_s = \mf{R}_{sb}\mf{v}_b \quad \mf{v}_b = \mf{R}_{bs}\mf{v}_s  = \mf{R}_{sb}^\top\mf{v}_s \]
+        \vspace{-0.6cm}
+
+        \textcolor{mygray}{\small Note that the second letter in the subscript of the rotation matrix on left gets cancelled by the first letter in the subscript of the vector on the right.
+        \[ \mf{v}_l = \mf{R}_{l\cancel{m}} \mf{v}_{\cancel{m}} \]}
+        \vspace{-0.6cm}
+        \item Rotate a vector by an angle $\theta$ about the origin.
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=7]
+          \foreach \x in {-0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,0.4);
+          \foreach \x in {-0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(0.4,\x);
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm, text=blue]{$\mf{x}_s$};
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm, text=blue]{$\mf{y}_s$};
+          \draw[very thick, brown!50!, -latex] (0, 0) -- (0.1414,0.1414) node[xshift=0.1cm, yshift=0.1cm, text=brown]{$\mf{x}_b$};
+          \draw[very thick, brown!50!, -latex] (0, 0) -- (-0.1414, 0.1414) node[xshift=-0.15cm, yshift=0.15cm, text=brown]{$\mf{y}_b$};
+          \draw[very thick, black, -latex] (0, 0) -- (0.1,0.25) node[xshift=0.1cm, yshift=0.1cm]{$\mf{v}$};
+          % Draw a radius
+          \draw[brown] (0,0) ++ (0.1,0) arc (0:45:0.1) node[midway, right]{$\theta$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation}
+  \begin{columns}[T]
+    \begin{column}{0.575\textwidth}
+      Consider two body reference frames \rbframe{b_1} and \rbframe{b_2}. Let $\mf{R}_{sb_1}$ \rbframe{b_1} in \rbframe{s}. And let $\mf{R}_{b_1b_2}$ be the rotation matrix representing \rbframe{b_2} in \rbframe{b_1}. Then,
+
+      \[ \mf{R}_{sb_2} = \mf{R}_{s\cancel{b_1}}\mf{R}_{\cancel{b_1}b_2} \]
+
+      Show that:
+      \[ \mf{R}_{b_1b_2} = \bmx \cos\lp \theta_2 - \theta_1 \rp & \sin\lp \theta_2 - \theta_1 \rp \\ -\sin\lp \theta_2 - \theta_1 \rp & \cos\lp \theta_2 - \theta_1 \rp \emx \]
+
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=7]
+          \foreach \x in {-0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,0.4);
+          \foreach \x in {-0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(0.4,\x);
+          % Space frame
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm, text=blue]{$\mf{x}_s$};
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm, text=blue]{$\mf{y}_s$};
+          % Body frame 1
+          \draw[very thick, brown!50!, -latex] (0, 0) -- ({0.2*cos(30)},{0.2*sin(30)}) node[xshift=0.1cm, yshift=0.1cm, text=brown]{$\mf{x}_{b_1}$};
+          \draw[very thick, brown!50!, -latex] (0, 0) -- ({-0.2*sin(30)},{0.2*cos(30)}) node[xshift=-0.175cm, yshift=0.15cm, text=brown]{$\mf{y}_{b_1}$};
+          % Body frame 2
+          \draw[very thick, red!50!, -latex] (0, 0) -- ({0.2*cos(160)},{0.2*sin(160)}) node[xshift=-0.2cm, yshift=0.1cm, text=red]{$\mf{x}_b$};
+          \draw[very thick, red!50!, -latex] (0, 0) -- ({-0.2*sin(160)},{0.2*cos(160)}) node[xshift=-0.25cm, yshift=0.15cm, text=red]{$\mf{y}_b$};
+          % Draw a radius
+          \draw[brown] (0,0) ++ (0.05,0) arc (0:30:0.05) node[xshift=0.15cm, yshift=-0.45cm]{$\theta_1$};
+          \draw[red, thin] (0,0) ++ (0.075,0) arc (0:160:0.075) node[xshift=0.cm, yshift=-0.25cm]{$\theta_2$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation and Translation}
+  \begin{columns}[T]
+    \begin{column}{0.475\textwidth}
+      Let $S$ and $B$ be the fixed and body frames respectively. 
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=4.5]
+          \foreach \x in {-0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,1.2);
+          \foreach \x in {-0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(1.2,\x);
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm, text=blue]{$\mf{x}_s$};
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm, text=blue]{$\mf{y}_s$};
+          \draw[very thick, brown!50!, -latex] (0.4,0.8) -- (0.5414,0.9414) node[xshift=0.1cm, yshift=0.1cm, text=brown]{$\mf{x}_b$};
+          \draw[very thick, brown!50!, -latex] (0.4,0.8) -- (0.2586, 0.9414) node[xshift=-0.15cm, yshift=0.15cm, text=brown]{$\mf{y}_b$};
+          \draw[very thick, black, -latex] (0,0) -- (0.4,0.8) node[xshift=-0.0cm, yshift=-1.1cm]{$\ax{p}{SB}$};
+          \draw[brown] (0,0) ++ (0.5,0.8) arc (0:45:0.1) node[xshift=0.2cm, yshift=-0.5cm]{$\theta$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 
