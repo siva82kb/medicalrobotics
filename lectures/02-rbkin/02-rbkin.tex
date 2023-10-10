@@ -339,12 +339,12 @@ Christian Medical College Vellore
     \[ \mf{x}\mf{y}^{\top} = \begin{bmatrix}
       x_1\\ x_2\\ \vdots \\x_n
     \end{bmatrix} \begin{bmatrix}
-      y_1 &  y_2 & \ldots & y_m
+      y_1 &  y_2 & \cdots & y_m
     \end{bmatrix} = \begin{bmatrix}
-      x_1y_1 &  x_1y_2 & \ldots & x_1y_m \\
-      x_2y_1 &  x_2y_2 & \ldots & x_2y_m \\
+      x_1y_1 &  x_1y_2 & \cdots & x_1y_m \\
+      x_2y_1 &  x_2y_2 & \cdots & x_2y_m \\
       \vdots &  \vdots & \ddots & \vdots \\
-      x_ny_1 &  x_ny_2 & \ldots & x_ny_m \\
+      x_ny_1 &  x_ny_2 & \cdots & x_ny_m \\
     \end{bmatrix} \in \mb{R}^{n \times m} \]
   \end{itemize}
 \end{frame}
@@ -382,10 +382,10 @@ Christian Medical College Vellore
 \begin{frame}[t]{Linear transformations}
   \begin{itemize}
     \item Linear functions $f: \mathbb{R}^m \mapsto \mathbb{R}$, 
-    $$y = f\left(\mf{x}\right) = \mf{w}^{\top}\mf{x}; \,\,\, \mf{w}, \mf{x} \in \mathbb{R}^m, \,\, y \in \mathbb{R}$$
+    \[ y = f\left(\mf{x}\right) = \mf{w}^{\top}\mf{x}; \,\,\, \mf{w}, \mf{x} \in \mathbb{R}^m, \,\, y \in \mathbb{R} \]
     
     \item Generalization of the linear function is when its range $\mathbb{R}^n$:
-    $$\mf{y} = f\left(\mf{x}\right); \,\,\, \mf{x} \in \mathbb{R}^m, \,\, \mf{y} \in \mathbb{R}^n$$
+    \[ \mf{y} = f\left(\mf{x}\right); \,\,\, \mf{x} \in \mathbb{R}^m, \,\, \mf{y} \in \mathbb{R}^n \]
     
     \item These can be represented as, $\mf{y} = \mf{Ax}, \,\,\, \mf{A} \in \mathbb{R}^{n \times m}$.\\
     
@@ -645,7 +645,13 @@ Christian Medical College Vellore
 \begin{frame}{Rigid Body Motions in a Plane: Rotation and Translation}
   \begin{columns}[T]
     \begin{column}{0.475\textwidth}
-      Let $S$ and $B$ be the fixed and body frames respectively. 
+      What do we do when have the body frame \rbframe{b} translated by a vector $\mf{p}_{sb}$ and rotated by a certain angle with repsect to the space frame \rbframe{s}?
+
+      \textcolor{mygray}{\small \textbf{Note}: $\mf{p}_{sb}$ is the representation of the position of the origin of \rbframe{b} with respect to the \rbframe{s}.}
+
+      Let $\mf{R}_{sb}$ be the represntation of \rbframe{b} in \rbframe{s}. Then, the complete representation of \rbframe{b} in \rbframe{s} is given by the pair $\lp \mf{R}_{sb}, \mf{p}_{sb}\rp$.
+      \[ \mf{p}_{sb} = \bmx p_{{sb}_x} \\ p_{{sb}_y} \emx \quad \quad \mf{R}_{sb} = \bmx \cos\theta  & \sin\theta \\ -
+      \sin\theta & \cos\theta \emx \]
       
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -660,8 +666,113 @@ Christian Medical College Vellore
           \draw[very thick, blue!50!, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm, text=blue]{$\mf{y}_s$};
           \draw[very thick, brown!50!, -latex] (0.4,0.8) -- (0.5414,0.9414) node[xshift=0.1cm, yshift=0.1cm, text=brown]{$\mf{x}_b$};
           \draw[very thick, brown!50!, -latex] (0.4,0.8) -- (0.2586, 0.9414) node[xshift=-0.15cm, yshift=0.15cm, text=brown]{$\mf{y}_b$};
-          \draw[very thick, black, -latex] (0,0) -- (0.4,0.8) node[xshift=-0.0cm, yshift=-1.1cm]{$\ax{p}{SB}$};
+          \draw[very thick, black, -latex] (0,0) -- (0.4,0.8) node[xshift=-0.4cm, yshift=-1.6cm]{$\mf{p}_{sb}$};
           \draw[brown] (0,0) ++ (0.5,0.8) arc (0:45:0.1) node[xshift=0.2cm, yshift=-0.5cm]{$\theta$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation and Translation}
+  \begin{columns}[T]
+    \begin{column}{0.475\textwidth}
+      Consider the point represented by the small black circle, whose position is given by $\mf{v}_{s}$ and $\mf{v}_{b}$ in \rbframe{s} and \rbframe{b}, respectively. The transformation between $\mf{v}_{s}$ and $\mf{v}_{b}$ is given by ,
+      \[ \mf{v}_{s} = \mf{R}_{sb}\mf{v}_b + \mf{p}_{sb} \]
+      \[ \begin{split}
+          \mf{v}_{b} &= \mf{R}_{sb}^\top\lp \mf{v}_s - \mf{p}_{sb} \rp \\
+                     &= \mf{R}_{bs} \mf{v}_s - \mf{R}_{bs} \mf{p}_{sb} \\
+                     &= \mf{R}_{bs} \mf{v}_s + \mf{p}_{bs}
+         \end{split} 
+        \]
+      $\lp \mf{R}_{sb}, \mf{p}_{sb}\rp$ transforms \rbframe{b} $\mapsto$ \rbframe{s}.
+      
+      $\lp \mf{R}_{sb}^\top, -\mf{R}_{sb}^\top\mf{p}_{sb}\rp$ transforms \rbframe{s} $\mapsto$ \rbframe{b}.
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=4.5]
+          \foreach \x in {-0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,1.2);
+          \foreach \x in {-0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(1.2,\x);
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm, text=blue]{$\mf{x}_s$};
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm, text=blue]{$\mf{y}_s$};
+          \draw[very thick, brown!50!, -latex] (0.4,0.8) -- (0.5414,0.9414) node[xshift=0.1cm, yshift=0.1cm, text=brown]{$\mf{x}_b$};
+          \draw[very thick, brown!50!, -latex] (0.4,0.8) -- (0.2586, 0.9414) node[xshift=-0.15cm, yshift=0.15cm, text=brown]{$\mf{y}_b$};
+          \draw[very thick, black, -latex] (0,0) -- (0.4,0.8) node[xshift=-0.4cm, yshift=-1.6cm]{$\mf{p}_{sb}$};
+          \filldraw (0.6,0.2) circle (0.01cm);
+          \draw[very thick, purple, -latex] (0,0) -- (0.6,0.2) node[xshift=-0.6cm, yshift=-0.5cm]{$\mf{v}_{s}$};
+          \draw[very thick, purple, -latex] (0.4,0.8) -- (0.6,0.2) node[xshift=0.1cm, yshift=0.8cm]{$\mf{v}_{b}$};
+          \draw[brown] (0,0) ++ (0.5,0.8) arc (0:45:0.1) node[xshift=0.2cm, yshift=-0.5cm]{$\theta$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation and Translation}
+  \begin{columns}[T]
+    \begin{column}{0.475\textwidth}
+      The pair $\lp \mf{R}_{sb}, \mf{p}_{sb}\rp$ allows:
+      \begin{enumerate}
+        \item Representation of a rotated and translated frame \rbframe{b} w.r.t \rbframe{s}.
+        \item Transformation of vectors between \rbframe{s} and \rbframe{b}.
+        \item Performs rotation and transalation of a give vector.
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=4.5]
+          \foreach \x in {-0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,1.2);
+          \foreach \x in {-0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(1.2,\x);
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm, text=blue]{$\mf{x}_s$};
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm, text=blue]{$\mf{y}_s$};
+          \draw[very thick, brown!50!, -latex] (0.4,0.8) -- (0.5414,0.9414) node[xshift=0.1cm, yshift=0.1cm, text=brown]{$\mf{x}_b$};
+          \draw[very thick, brown!50!, -latex] (0.4,0.8) -- (0.2586, 0.9414) node[xshift=-0.15cm, yshift=0.15cm, text=brown]{$\mf{y}_b$};
+          \draw[very thick, black, -latex] (0,0) -- (0.4,0.8) node[xshift=-0.4cm, yshift=-1.6cm]{$\mf{p}_{sb}$};
+          \filldraw (0.6,0.2) circle (0.01cm);
+          \draw[very thick, purple, -latex] (0,0) -- (0.6,0.2) node[xshift=-0.6cm, yshift=-0.5cm]{$\mf{v}_{s}$};
+          \draw[very thick, purple, -latex] (0.4,0.8) -- (0.6,0.2) node[xshift=0.1cm, yshift=0.8cm]{$\mf{v}_{b}$};
+          \draw[brown] (0,0) ++ (0.5,0.8) arc (0:45:0.1) node[xshift=0.2cm, yshift=-0.5cm]{$\theta$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation and Translation}
+  \begin{columns}[T]
+    \begin{column}{0.475\textwidth}
+      Find the pair $\lp \mf{R}_{sb_2}, \mf{p}_{sb_2}\rp$, given the pairs $\lp \mf{R}_{sb_1}, \mf{p}_{sb_1} \rp$ and $\lp \mf{R}_{b_1b_2}, \mf{p}_{b_1b_2} \rp$.
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=4.5]
+          \foreach \x in {-0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,1.2);
+          \foreach \x in {-0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(1.2,\x);
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm, text=blue]{$\mf{x}_s$};
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm, text=blue]{$\mf{y}_s$};
+          % Body frame 1
+          \draw[very thick, brown!50!, -latex] (0.8,0.4) -- (0.973,0.5) node[xshift=0.1cm, yshift=0.1cm, text=brown]{$\mf{x}_{b_1}$};
+          \draw[very thick, brown!50!, -latex] (0.8,0.4) -- (0.7, 0.5732) node[xshift=-0.15cm, yshift=0.15cm, text=brown]{$\mf{y}_{b_1}$};
+          \draw[very thick, black, -latex] (0,0) -- (0.8,0.4) node[xshift=-1cm, yshift=-1cm]{$\mf{p}_{sb_1}$};
+          % Body frame 2
+          \draw[very thick, brown!50!, -latex] (0.2,0.8) -- (0.0586,0.9414) node[xshift=0.1cm, yshift=0.1cm, text=brown]{$\mf{x}_{b_2}$};
+          \draw[very thick, brown!50!, -latex] (0.2,0.8) -- (0.0586, 0.6586) node[xshift=-0.2cm, yshift=0.15cm, text=brown]{$\mf{y}_{b_2}$};
+          \draw[very thick, black, -latex] (0,0) -- (0.8,0.4) node[xshift=-1cm, yshift=-1cm]{$\mf{p}_{sb_1}$};
+          \draw[very thick, black, -latex] (0.8,0.4) -- (0.2,0.8) node[xshift=1cm, yshift=-1cm]{$\mf{p}_{b_1b_2}$};
+          
         \end{tikzpicture}
       \end{figure}
     \end{column}
