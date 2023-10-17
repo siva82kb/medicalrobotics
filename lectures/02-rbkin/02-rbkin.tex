@@ -503,12 +503,15 @@ Christian Medical College Vellore
 \begin{frame}{Rigid Body Motions in a Plane: Rotation}
   \begin{columns}[T]
     \begin{column}{0.475\textwidth}
-      Let rbframe{s} and \rbframe{b} be the fixed and body frames respectively. The body frame is rotated by an angle $\theta$ with respect to the fixed frame.
+      Let \rbframe{s} and \rbframe{b} be the fixed and body frames respectively. The body frame is rotated by an angle $\theta$ with respect to the fixed frame.
 
       The vectors $\lc \mf{x}_{s}, \mf{y}_s \rc$ and $\lc \mf{x}_b, \mf{y}_b \rc$ form an orthonormal basis for \rbframe{s} and \rbframe{b}, respectively.
 
-      The representation of the basis vectors of \rbframe{b} in \rbframe{s} are given by the following,
-      \[ \mf{x}_b = \bmx \mf{x}_s^\top \mf{x}_b \\ \mf{y}_s^\top \mf{x}_b \emx \quad \mf{y}_b = \bmx \mf{x}_s^\top \mf{y}_b \\ \mf{y}_s^\top \mf{y}_b \emx \]
+      $\bullet$ Representation of $\mf{x}_b$ in \rbframe{s}: $\bmx \mf{x}_s^\top \mf{x}_b \\ \mf{y}_s^\top \mf{x}_b \emx$
+      \vspace{0.2cm}
+
+      $\bullet$ Representation of $\mf{y}_b$ in \rbframe{s}: $\bmx \mf{x}_s^\top \mf{y}_b \\ \mf{y}_s^\top \mf{y}_b \emx$
+
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{figure}
@@ -535,10 +538,10 @@ Christian Medical College Vellore
   \begin{columns}[T]
     \begin{column}{0.475\textwidth}
       This representation can be compactly expressed as the following,
-      \[ \bmx \mf{x}_b & \mf{y}_b \emx = \bmx \mf{x}_s^\top \mf{x}_b & \mf{x}_s^\top \mf{y}_b \\ \mf{y}_s^\top \mf{x}_b & \mf{y}_s^\top \mf{y}_b \emx \]
+      \[ \bmx \mf{x}_s^\top \mf{x}_b & \mf{x}_s^\top \mf{y}_b \\ \mf{y}_s^\top \mf{x}_b & \mf{y}_s^\top \mf{y}_b \emx \triangleq \mf{R}_{sb}\]
 
       From the definition of the standard inner product, we know that,
-      \[ \bmx \mf{x}_b & \mf{y}_b \emx = \bmx \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \emx \triangleq \mf{R}_{sb} \]
+      \[  \mf{R}_{sb} = \bmx \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \emx \]
 
       $\mf{R}_{sb}$ is rotation matrix representing \rbframe{b} in \rbframe{s}. It is parametrized by a single parameter $\theta$.
 
@@ -569,18 +572,47 @@ Christian Medical College Vellore
     \begin{column}{0.575\textwidth}
       All 2D Rotaiton matrices $\mf{R} \in \mb{R}^{2 \times 2}$ are orthogonal matrices, i.e. $\mf{R}^{-1} = \mf{R}^\top$.
 
-      Rotation matrices have different purposes:
-      \begin{enumerate}
-        \item $\mf{R}_{sb}$: Represents the orientation of \rbframe{b} in \rbframe{s}.
-        \item Transforming vectors between reference frames.
-        \[ \mf{v}_s = \mf{R}_{sb}\mf{v}_b \quad \mf{v}_b = \mf{R}_{bs}\mf{v}_s  = \mf{R}_{sb}^\top\mf{v}_s \]
-        \vspace{-0.6cm}
+      Rotation matrices have three different purposes:
+      \vspace{1cm}
 
-        \textcolor{mygray}{\small Note that the second letter in the subscript of the rotation matrix on left gets cancelled by the first letter in the subscript of the vector on the right.
-        \[ \mf{v}_l = \mf{R}_{l\cancel{m}} \mf{v}_{\cancel{m}} \]}
-        \vspace{-0.6cm}
-        \item Rotate a vector by an angle $\theta$ about the origin.
-      \end{enumerate}
+      \tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {\textbf{1}};} \textcolor{myred}{$\mf{R}_{sb}$: Represents the orientation of \rbframe{b} in \rbframe{s}.}
+
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=8]
+          \foreach \x in {-0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,0.4);
+          \foreach \x in {-0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(0.4,\x);
+          \draw[very thick, blue, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm]{$\mf{x}_s$};
+          \draw[very thick, blue, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm]{$\mf{y}_s$};
+          \draw[very thick, brown, -latex] (0, 0) -- (0.1414,0.1414) node[xshift=0.1cm, yshift=0.1cm]{$\mf{x}_b$};
+          \draw[very thick, brown, -latex] (0, 0) -- (-0.1414, 0.1414) node[xshift=-0.15cm, yshift=0.15cm]{$\mf{y}_b$};
+          % Draw a radius
+          \draw (0,0) ++ (0.1,0) arc (0:45:0.1) node[midway, right]{$\theta$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation}
+  \begin{columns}[T]
+    \begin{column}{0.575\textwidth}
+      Rotation matrices have three different purposes:
+      \vspace{0.25cm}
+
+      \tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {\textbf{2}};} \textcolor{myred}{
+        Transforming vectors between reference frames.
+        \[ \mf{v}_s = \mf{R}_{sb}\mf{v}_b \quad \mf{v}_b = \mf{R}_{bs}\mf{v}_s  = \mf{R}_{sb}^\top\mf{v}_s \]
+      }
+      
+      \textcolor{mygray}{\small Note that the second letter in the subscript of the rotation matrix on left gets cancelled by the first letter in the subscript of the vector on the right.
+      \[ \mf{v}_l = \mf{R}_{l\cancel{m}} \mf{v}_{\cancel{m}} \]}
+
     \end{column}
     \begin{column}{0.4\textwidth}
       \begin{figure}
@@ -607,12 +639,44 @@ Christian Medical College Vellore
 \begin{frame}{Rigid Body Motions in a Plane: Rotation}
   \begin{columns}[T]
     \begin{column}{0.575\textwidth}
+      Rotation matrices have three different purposes:
+      \vspace{1cm}
+
+      \tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {\textbf{3}};} \textcolor{myred}{
+        Rotate a vector  $\mf{w}_s$ by an angle $\theta$ about the origin.
+        \[ \mf{w}_s' = \mf{R}_{sb}\mf{w}_s \]
+      }
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=7]
+          \foreach \x in {-0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,0.4);
+          \foreach \x in {-0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(0.4,\x);
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm, text=blue]{$\mf{x}_s$};
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm, text=blue]{$\mf{y}_s$};
+          \draw[very thick, black, -latex] (0,0) -- (30:0.2) node[xshift=0.1cm, yshift=0.1cm]{$\mf{w}$};
+          \draw[very thick, black, -latex] (0,0) -- (75:0.2) node[xshift=0.1cm, yshift=0.15cm]{$\mf{w}'$};
+          % Draw a radius
+          \draw[brown] (0,0) ++ (30:0.1) arc (30:75:0.1) node[yshift=0.1cm, xshift=0.4cm]{$\theta$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation}
+  \begin{columns}[T]
+    \begin{column}{0.575\textwidth}
       Consider two body reference frames \rbframe{b_1} and \rbframe{b_2}. Let $\mf{R}_{sb_1}$ \rbframe{b_1} in \rbframe{s}. And let $\mf{R}_{b_1b_2}$ be the rotation matrix representing \rbframe{b_2} in \rbframe{b_1}. Then,
 
       \[ \mf{R}_{sb_2} = \mf{R}_{s\cancel{b_1}}\mf{R}_{\cancel{b_1}b_2} \]
 
       Show that:
-      \[ \mf{R}_{b_1b_2} = \bmx \cos\lp \theta_2 - \theta_1 \rp & \sin\lp \theta_2 - \theta_1 \rp \\ -\sin\lp \theta_2 - \theta_1 \rp & \cos\lp \theta_2 - \theta_1 \rp \emx \]
+      \[ \mf{R}_{b_1b_2} = \bmx \cos\lp \theta_1 + \theta_2 \rp & \sin\lp \theta_1 + \theta_2 \rp \\ -\sin\lp \theta_1 + \theta_2 \rp & \cos\lp \theta_1 + \theta_2 \rp \emx \]
 
     \end{column}
     \begin{column}{0.4\textwidth}
@@ -634,7 +698,7 @@ Christian Medical College Vellore
           \draw[very thick, red!50!, -latex] (0, 0) -- ({-0.2*sin(160)},{0.2*cos(160)}) node[xshift=-0.25cm, yshift=0.15cm, text=red]{$\mf{y}_b$};
           % Draw a radius
           \draw[brown] (0,0) ++ (0.05,0) arc (0:30:0.05) node[xshift=0.15cm, yshift=-0.45cm]{$\theta_1$};
-          \draw[red, thin] (0,0) ++ (0.075,0) arc (0:160:0.075) node[xshift=0.cm, yshift=-0.25cm]{$\theta_2$};
+          \draw[red, thin] (30:0.075) arc (30:160:0.075) node[xshift=0.cm, yshift=-0.25cm]{$\theta_2$};
         \end{tikzpicture}
       \end{figure}
     \end{column}
@@ -778,6 +842,114 @@ Christian Medical College Vellore
     \end{column}
   \end{columns}
 \end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Homogenous representation}
+  \begin{itemize}
+    \item The combined transformation of rotation and translation can be represented as a simple linear operation by using the homogenous representation for vectors and the transformations.
+    \item For rotations and translations in $\mb{R}^2$, these rigid body transformations have a simple representation for the matrices and vectors in $\mb{R}^3$. The homogenous representation of a vector $\mf{r} \in \mb{R}^2$ is given by,
+    \[ \overline{\mf{r}} = \bmx \mf{r} \\ 1\emx = \bmxc r_x \\ r_y \\ 1\emx \in \mb{R}^3\]
+    \item The homogenous representation of rigid body transformation invovling a rotation $\mf{R} \in \mb{R}^{2 \times 2}$ and translation $\mf{p} \in \mb{R}^2$ is given by,
+    \[ \overline{\mf{H}} = \bmx \mf{R} & \mf{p} \\ \mf{0} & 1 \emx \in \mb{R}^3 \]
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Homogenous representation}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \[ \mf{p}_{sb} = \bmx p_{{sb}_x} \\ p_{{sb}_y} \emx \quad \quad \mf{R}_{sb} = \bmx \cos\theta  & \sin\theta \\ -
+      \sin\theta & \cos\theta \emx \]
+
+      The homogenous representation of the pair $\lp \mf{R}_{sb}, \mf{p}_{sb}\rp$ is given by, 
+      \[ \overline{\mf{H}}_{sb} = \bmx \mf{R}_{sb} & \mf{p}_{sb} \\ \mf{0} & 1 \emx = \bmxc \cos\theta  & \sin\theta & p_{{sb}_x}\\ -
+      \sin\theta & \cos\theta  & p_{{sb}_y} \\ 
+      0 & 0 & 1\emx \]
+      
+    \end{column}
+    \begin{column}{0.475\textwidth}
+      \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=4.0]
+          \foreach \x in {-0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2}
+            \draw[gray, thin, densely dashed] (\x,-0.2)--(\x,1.2);
+          \foreach \x in {-0.2, 0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2}
+            \draw[gray, thin, densely dashed] (-0.4,\x)--(1.2,\x);
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0.2,0) node[xshift=0.3cm, yshift=0cm, text=blue]{$\mf{x}_s$};
+          \draw[very thick, blue!50!, -latex] (0,0) -- (0,0.2) node[xshift=0cm, yshift=0.3cm, text=blue]{$\mf{y}_s$};
+          \draw[very thick, brown!50!, -latex] (0.4,0.8) -- (0.5414,0.9414) node[xshift=0.1cm, yshift=0.1cm, text=brown]{$\mf{x}_b$};
+          \draw[very thick, brown!50!, -latex] (0.4,0.8) -- (0.2586, 0.9414) node[xshift=-0.15cm, yshift=0.15cm, text=brown]{$\mf{y}_b$};
+          \draw[very thick, black, -latex] (0,0) -- (0.4,0.8) node[xshift=-0.4cm, yshift=-1.6cm]{$\mf{p}_{sb}$};
+          \draw[brown] (0,0) ++ (0.5,0.8) arc (0:45:0.1) node[xshift=0.2cm, yshift=-0.5cm]{$\theta$};
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in a Plane: Rotation and Translation}
+  \begin{itemize}
+    \item The inverse of the rigid body transformation $\homo{H}{sb}$ is given by,
+    \[ \homo{H}{bs} = \homo{H}{sb}^{-1} = \bmxc \mf{R}_{sb}^\top & -\mf{R}_{sb}^\top\mf{p}_{sb} \\ \mf{0} & 1 \emx \]
+
+    \item Verify that $\homo{H}{sb}\homo{H}{bs} = \homo{H}{bs}\homo{H}{sb} = \mf{I}_3$.
+
+    \item What is the interpretation of $-\mf{R}_{sb}^\top\mf{p}_{sb}$?
+    
+    \item What are the homogenous representations of a pure rotation and a pure translation?
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in 3D: Rotation}
+  \begin{columns}[T]
+    \begin{column}{0.475\textwidth}
+      The representation of \rbframe{b} in \rbframe{s} is given the following,
+      \[ \mf{R}_{sb} = \bmxc 
+      \mf{x}_{s}^\top \mf{x}_{b} & \mf{x}_{s}^\top \mf{y}_{b} & \mf{x}_{s}^\top \mf{z}_{b}\\
+      \mf{y}_{s}^\top \mf{x}_{b} & \mf{y}_{s}^\top \mf{y}_{b} & \mf{y}_{s}^\top \mf{z}_{b}\\
+      \mf{z}_{s}^\top \mf{x}_{b} & \mf{z}_{s}^\top \mf{y}_{b} & \mf{z}_{s}^\top \mf{z}_{b}
+      \emx \in \mb{R}^{3 \times 3} \]
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \centering
+        \tdplotsetmaincoords{45}{135} % Set the viewpoint angle
+        \begin{tikzpicture}[scale=3, tdplot_main_coords]
+            % Draw the first reference frame
+            \draw[thick,-latex] (0,0,0) -- (1,0,0) node[anchor=north east]{$\mf{x}_{s}$};
+            \draw[thick,-latex] (0,0,0) -- (0,1,0) node[anchor=north west]{$\mf{y}_{s}$};
+            \draw[thick,-latex] (0,0,0) -- (0,0,1) node[anchor=south]{$\mf{z}_{s}$};
+            
+            % Rotate the viewpoint for the second reference frame
+            \tdplotsetrotatedcoords{10}{20}{10}
+            
+            % Draw the second reference frame
+            \begin{scope}[tdplot_rotated_coords]
+                \draw[thick, red,-latex] (0,0,0) -- (1,0,0) node[anchor=north east]{$\mf{x}_{b}$};
+                \draw[thick, red,-latex] (0,0,0) -- (0,1,0) node[anchor=north west]{$\mf{y}_{b}$};
+                \draw[thick, red,-latex] (0,0,0) -- (0,0,1) node[anchor=south]{$\mf{z}_{b}$};
+            \end{scope}
+        \end{tikzpicture}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Rigid Body Motions in 3D: Rotation}
+  \textbf{Properties of rotation matrices:}
+  \begin{itemize}
+    \item Inverse of a rotation matrix $\mf{R}$ is its transpose. $\mf{R}^\top = \mf{R}^{-1}$. This means that the columns of a rotation matrix are orthonormal.
+    \item The determinant of a rotation matrix is always 1. $\det\lp \mf{R} \rp = 1$.
+    \item The set of all 3D rotation matrices form a \textit{group} called the \textbf{\textit{Special Orthogonal}} group called the $SO\lp 3\rp$ group.
+    \[ SO\lp 3 \rp := \lc \mf{R} \in \mb{R}^{3 \times 3} \, : \, \mf{R}^\top\mf{R} = \mf{I}, \, \det \mf{R} = +1 \rc  \]
+
+    $SO\lp 3 \rp$ group is also referred to as the \textit{rotation group} of $\mb{R}^3$.
+  \end{itemize}
+\end{frame}
+
 
 
 \end{document}
